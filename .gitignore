@@ -1,0 +1,77 @@
+node_modules/
+blocks/node_modules/
+admin-editor-assets/node_modules/
+.DS_Store
+.svn
+.cvs
+*.bak
+*.swp
+Thumbs.db
+
+### WordPress Core (as of WordPress 6.8.2)
+#
+# Critical for security, should NEVER be committed
+wp-config.php
+# Directories
+/wp-admin/
+/wp-includes/
+# Files in the root directory
+/index.php
+/license.txt
+/readme.html
+/wp-activate.php
+/wp-blog-header.php
+/wp-comments-post.php
+/wp-config-sample.php
+/wp-cron.php
+/wp-links-opml.php
+/wp-load.php
+/wp-login.php
+/wp-mail.php
+/wp-settings.php
+/wp-signup.php
+/wp-trackback.php
+/xmlrpc.php
+
+# Default Themes
+index.php
+twentytwentyfive
+twentytwentyfour
+twentytwentythree
+twentytwentytwo
+twentytwentyone
+
+# large/disallowed file types
+# a CDN should be used for these
+*.hqx
+*.bin
+*.exe
+*.dll
+*.deb
+*.dmg
+*.iso
+*.img
+*.msi
+*.msp
+*.msm
+*.mid
+*.midi
+*.kar
+*.mp3
+*.ogg
+*.m4a
+*.ra
+*.3gpp
+*.3gp
+*.mp4
+*.mpeg
+*.mpg
+*.mov
+*.webm
+*.flv
+*.m4v
+*.mng
+*.asx
+*.asf
+*.wmv
+*.avi

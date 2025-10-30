@@ -1,0 +1,77 @@
+/* ---------------------------------------
+	Appear animation
+--------------------------------------- */
+
+@include breakpoint(large) {
+
+	[data-scroll] {
+		transition: opacity 0.5s ease-in-out, transform 1s cubic-bezier(.16, .88, 0.45, 1);
+	}
+
+	.fade-in, .ease-right, .ease-left, .ease-btm, .ease-top {
+		opacity: 0;
+
+		&[data-scroll="in"] {
+			opacity: 1;
+		}
+	}
+
+	.fade-in {
+		transition-duration: 1s;
+	}
+
+	[class*="ease-"] {
+		&[data-scroll="in"] {
+			transform: none;
+		}
+	}
+
+	.ease-right {
+		transform: translateX(100px);
+	}
+
+	.ease-left {
+		transform: translateX(-100px);
+	}
+
+	.ease-top {
+		transform: translateY(-100px);
+	}
+
+	.ease-btm {
+		transform: translateY(100px);
+	}
+
+	[class*="flip-"] {
+		&[data-scroll="in"] {
+			transform: perspective(400px);
+			backface-visibility: visible !important;
+		}
+	}
+
+	.flip-top {
+		transform: perspective(400px) rotateX(-90deg);
+		transform-origin: center top;
+	}
+
+	.flip-btm {
+		transform: perspective(400px) rotateX(90deg);
+		transform-origin: center bottom;
+	}
+
+	.flip-left {
+		transform: perspective(400px) rotateY(90deg);
+		transform-origin: left center;
+	}
+
+	.flip-right {
+		transform: perspective(400px) rotateY(-90deg);
+		transform-origin: right center;
+	}
+
+	@for $i from 1 through 5 {
+		.ease-delay-#{$i}00 {
+			transition-delay: #{$i*300}ms;
+		}
+	}
+}

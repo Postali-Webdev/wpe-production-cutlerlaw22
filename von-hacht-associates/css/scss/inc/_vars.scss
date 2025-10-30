@@ -1,0 +1,25 @@
+// Project variables
+
+$blue: #183d6a;
+$grey: #b9b9b9;
+$text-color: #000;
+$green: #6db29f;
+
+$main-color: $blue;
+$sub-color: $main-color;
+
+$font: 'Roboto', sans-serif;
+$sub-font: 'Merriweather', serif;
+
+$fa: 'Font Awesome 5 Free';
+$fab: 'Font Awesome 5 Brands';
+
+// Font Awesome Vars
+$fa-font-path: "../fonts";
+$fa-font-display: swap;
+
+// Project mixins
+
+
+// Custom fonts
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');

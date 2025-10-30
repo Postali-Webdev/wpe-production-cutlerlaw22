@@ -1,0 +1,66 @@
+.contact {
+
+}
+
+.contact__content {
+	margin-bottom: 50px;
+}
+
+.contact__form {
+	margin-bottom: 50px;
+}
+
+.contact__map-wrap {
+	margin-top: 50px;
+}
+
+.contact__map {
+	height: 450px;
+}
+
+.contact__content{
+	margin-bottom: 50px;
+}
+
+.contact-link {
+	position: relative;
+	padding-left: 30px;
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 0;
+		color: $main-color;
+		font-family: $fa;
+		font-weight: 900;
+		transform: translateY(-50%);
+	}
+
+	&--email {
+		&::before {
+			content: '\f0e0';
+		}
+	}
+
+	&--phone {
+		&::before {
+			content: '\f879';
+		}
+	}
+
+	&--address{
+		&::before {
+			content: '\f3c5';
+		}
+	}
+
+	a {
+		color: inherit;
+		text-decoration: none;
+
+		&:hover, &:focus {
+			text-decoration: underline;
+		}
+	}
+}

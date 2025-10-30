@@ -1,0 +1,307 @@
+/* ---------------------------------------
+	Typography
+--------------------------------------- */
+
+body {
+  font-size: rem-calc(16);
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: $sub-font;
+
+  .white &, &.white {
+    color: #fff;
+  }
+
+  a {
+    color: inherit;
+  }
+}
+
+h1, .h1 {
+  /*basic heading styles*/
+  font-style: italic;
+  font-weight: 700;
+  font-size: 60px;
+  color: $text-color;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  @include breakpoint(small down) {
+    font-size: 27px;
+    line-height: 1.26;
+  }
+}
+
+h2, .h2 {
+  /*basic heading styles*/
+  font-style: italic;
+  font-weight: 700;
+  font-size: 41px;
+  color: $blue;
+  @include breakpoint(small down) {
+    font-size: 24px;
+
+  }
+}
+
+h3, .h3 {
+  /*basic heading styles*/
+  font-style: italic;
+  font-weight: 700;
+  font-size: 23px;
+  color: $blue;
+  letter-spacing: 0.02em;
+  @include breakpoint(small down) {
+    font-size: 17px;
+
+  }
+}
+
+h4, .h4 {
+  /*basic heading styles*/
+}
+
+h5, .h5 {
+  /*basic heading styles*/
+}
+
+h6, .h6 {
+  /*basic heading styles*/
+}
+
+p {
+  /*basic paragraph styles*/
+  font-size: 19px;
+  @include breakpoint(small down) {
+    font-size: 15px;
+  }
+
+  .white &, &.white {
+    color: #fff;
+  }
+
+  &:empty {
+    display: none;
+  }
+
+  a {
+    text-decoration: underline;
+    color: $green;
+
+    &:hover {
+      text-decoration: none;
+      color: #989898;
+    }
+  }
+}
+
+ul {
+  /*basic list styles*/
+  font-size: inherit;
+
+  .list-decor &, &.list-decor {
+    @include list-unstyled;
+
+    li {
+      /*basic list-item styles*/
+      font-size: 19px;
+      margin-bottom: 10px;
+      position: relative;
+      padding-left: 35px;
+      @include breakpoint(small down) {
+        font-size: 15px;
+
+      }
+      &:after {
+        position: absolute;
+        content: '';
+        width: 6px;
+        height: 6px;
+        left: 15px;
+        top: 8px;
+        border-radius: 50%;
+        background-color: $green;
+      }
+    }
+  }
+}
+
+address {
+  font-style: normal;
+  margin-bottom: $global-margin;
+}
+
+a {
+  color: $main-color;
+  transition: all 0.2s ease-in-out;
+
+  &:hover, &:focus {
+    /*basic hover and focus effects*/
+    color: darken($main-color, 20);
+  }
+}
+
+/* ---------------------------------------
+	Forms/Inputs
+--------------------------------------- */
+
+.no-outline {
+  button, a, [tabindex] {
+    outline: none;
+  }
+}
+
+/* Placeholder styling */
+
+input, textarea {
+  &::placeholder {
+    opacity: 1;
+  }
+}
+
+/* Input Styling */
+
+[type=color],
+[type=date],
+[type=datetime-local],
+[type=datetime],
+[type=email],
+[type=month],
+[type=number],
+[type=password],
+[type=search],
+[type=tel],
+[type=text],
+[type=time],
+[type=url],
+[type=week],
+textarea,
+select,
+.select-styled {
+  $height: ($input-font-size * unitless-calc($input-line-height)) + (get-side($input-padding, 'top') + get-side($input-padding, 'bottom')) + rem-calc(get-border-value($input-border, 'width') * 2);
+  /* STYLES GO THERE */
+  height: $height;
+  margin-bottom: 0;
+}
+
+textarea[rows] {
+  /*Styles for TextArea*/
+  height: 150px;
+  max-width: 100%;
+}
+
+[type=number] {
+  -moz-appearance: textfield;
+}
+
+[type=number]::-webkit-inner-spin-button,
+[type=number]::-webkit-outer-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}
+
+[type=checkbox],
+[type=file],
+[type=radio] {
+  margin-bottom: 0;
+}
+
+button, .button, input[type='submit'], input[type='reset'], input[type='button'] {
+  border: 1px solid $green;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+  font-family: $font;
+  border-radius: 24px;
+  background-color: $green;
+  color: #fff;
+
+  &:hover, &:focus {
+    background-color: #fff;
+    color: $green;
+  }
+}
+
+/* Button additional styles */
+
+.button {
+  border: 1px solid $green;
+  text-decoration: none;
+  background-color: $green;
+  color: #fff;
+  padding: 15px 55px;
+  font-weight: 700;
+  font-size: 17px;
+  text-align: center;
+  min-width: 195px;
+  font-family: $font;
+  border-radius: 24px;
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  position: relative;
+  -webkit-transition-property: color;
+  transition-property: color;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  overflow: hidden;
+  @include breakpoint(small down) {
+    padding: 8px 30px;
+  }
+  @include breakpoint(400 down) {
+    width: 100%;
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    bottom: 0;
+    background: #fff;
+    transition: .3s all linear;
+    border-radius: 24px;
+    transform: translateX(-100%);
+  }
+
+  &:hover, &:focus {
+    color: $green;
+    background-color: $green;
+    &:after {
+      transform: translateX(0);
+    }
+  }
+
+  &--blue {
+    border: 1px solid $blue;
+    background-color: $blue;
+
+    &:after {
+      background-color: #fff;
+    }
+
+    &:hover, &:focus {
+      /*basic hover and focus effects*/
+      background-color: $blue;
+      color: $blue;
+    }
+  }
+
+  &--tranperent {
+    background-color: transparent;
+    color: $green;
+
+    &:after {
+      background-color: $green;
+    }
+
+    &:hover, &:focus {
+      /*basic hover and focus effects*/
+      background-color: $green;
+      color: #fff;
+      border-color: $green;
+
+    }
+  }
+
+}

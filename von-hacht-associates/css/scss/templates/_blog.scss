@@ -1,0 +1,39 @@
+/* ---------------------------------------
+	Blog page
+--------------------------------------- */
+
+.preview {
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #ddd;
+}
+
+.preview__meta {
+	margin-top: 20px;
+	margin-bottom: 0;
+	color: #666;
+	font-size: 14px;
+}
+
+.preview__thumb {
+	@include breakpoint(small down) {
+		margin-bottom: 20px;
+	}
+}
+
+/* ---------------------------------------
+	Post / Page inner view
+--------------------------------------- */
+
+.entry__thumb {
+	margin-bottom: 20px;
+}
+
+.entry__meta {
+	color: #666;
+	font-size: 14px;
+}
+
+.entry__cat {
+	margin-top: 20px;
+}

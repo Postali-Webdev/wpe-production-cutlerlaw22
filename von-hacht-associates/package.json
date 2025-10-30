@@ -1,0 +1,52 @@
+{
+  "name": "gourdys-pumpkin-run",
+  "version": "2.0.0",
+  "description": "Node or Gulp for building process",
+  "main": "index.js",
+  "author": "developer",
+  "license": "ISC",
+  "dependencies": {
+    "circletype": "^2.3.0",
+    "foundation-sites": "~6.5.3"
+  },
+  "scripts": {
+    "bs": "browser-sync start --config bs-config.js",
+    "watch": "node-sass --watch scss/custom.scss -o css --source-map true --output-style compressed",
+    "build:fn": "node-sass scss/foundation.scss -o css --output-style compressed && postcss --use autoprefixer -r css/foundation.css --no-map",
+    "build:css": "node-sass scss -o css --output-style compressed && postcss --use autoprefixer -r css/*.css --no-map",
+    "prefix": "postcss --use autoprefixer -r css/*.css --no-map"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.6.0",
+    "browser-sync": "^2.26.3",
+    "cssnano": "^4.1.7",
+    "del": "^4.1.1",
+    "gulp": "^3.9.1",
+    "gulp-cached": "^1.1.1",
+    "gulp-compass": "^2.1.0",
+    "gulp-if": "^2.0.2",
+    "gulp-jshint": "^2.1.0",
+    "gulp-notify": "^3.2.0",
+    "gulp-postcss": "^8.0.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-stylelint": "^9.0.0",
+    "gulp-uglify": "^3.0.2",
+    "jshint": "^2.10.2",
+    "jshint-stylish": "^2.2.1",
+    "postcss-pxtorem": "^4.0.1",
+    "stylelint": "^10.1.0",
+    "stylelint-config-recommended": "^2.1.0",
+    "stylelint-config-wordpress": "*",
+    "stylelint-scss": "^3.3.0",
+    "url": "^0.11.0"
+  },
+  "browserslist": [
+    "last 2 version",
+    "> 1%",
+    "maintained node versions",
+    "IE 10",
+    "not dead"
+  ]
+}

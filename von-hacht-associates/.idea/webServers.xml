@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="4fea18c2-a6fe-4e8c-9d4e-38748345ad4e" name="gngf.ready" url="http://64.91.224.47">
+        <fileTransfer host="64.91.224.47" port="25566" rootFolder="/var/www/html/gngf/von-hacht-associates/wp-content/themes/von-hacht-associates" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="25566" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

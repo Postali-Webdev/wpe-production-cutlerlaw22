@@ -1,0 +1,344 @@
+@import 'vars';
+@import '../../../node_modules/foundation-sites/scss/util/util';
+
+/* ---------------------------------------
+	Required project style settings
+--------------------------------------- */
+
+// list of available colors for foundation.
+// Specify $main-color and $sub-color in ./css/inc/_vars.scss
+$foundation-palette: (
+	primary: $main-color,
+	secondary: $sub-color,
+	success: #3adb76,
+	warning: #ffae00,
+	alert: #cc4b37,
+);
+
+// List of additional colors
+$light-gray: #e6e6e6 !default;
+$medium-gray: #cacaca !default;
+$dark-gray: #8a8a8a !default;
+$black: #333 !default;
+$white: #fff !default;
+
+@include add-foundation-colors;
+
+// Grid
+
+$global-width: rem-calc(1200); // grid container max width
+$grid-margin-gutters: (
+	small: 30px,
+	//medium: 30px
+); // Grind columns gap (distance between columns). Can be specified different breakpoints
+
+// Desktop Menu
+
+$global-menu-padding: rem-calc(0 10); // Global Menu item link padding
+$dropdownmenu-padding: $global-menu-padding; // Desktop Menu item link padding
+$dropdownmenu-submenu-padding: rem-calc(5 10); // Submenu menu item link padding
+
+// Button
+
+$button-font-family: inherit; // Button font family
+$button-padding: rem-calc(10 15); // Button padding
+$button-background: $primary-color; // Button background
+$button-background-hover: scale-color($button-background, $lightness: -15%); // Button background on hover
+$button-color: $white; // Button text color
+$button-hollow-border-width: 1px; // Button outline border width
+$button-sizes: (
+	tiny: rem-calc(10),
+	small: rem-calc(13),
+	default: rem-calc(16),
+	large: rem-calc(20),
+); // Button sizes (use size name as class name: "button large")
+
+// Typography
+
+$global-lineheight: 1.5; // line-height that will apply to any text that has not specified line height
+$body-font-color: $text-color; // global text color $text-color comes from _vars.scss
+$body-font-family: $font; // global text font family
+$global-margin: 1rem; // global margin that will applies to any text (p, ul, ol, blockquote)
+
+$header-font-family: $body-font-family; // Headings font family
+$header-font-weight: 700; // Headings font weight
+$header-color: inherit; // Headings text color
+$header-lineheight: 1.4; // Headings line height
+$header-margin-bottom: 0.5rem; // Headings bottom margin
+
+// Headings sizes on Responsive and Desktop views
+$header-styles: (
+	small: (
+		'h1': ('font-size': 24),
+		'h2': ('font-size': 20),
+		'h3': ('font-size': 19),
+		'h4': ('font-size': 18),
+		'h5': ('font-size': 17),
+		'h6': ('font-size': 16),
+	),
+	medium: (
+		'h1': ('font-size': 41),
+		'h2': ('font-size': 35),
+		'h3': ('font-size': 28),
+		'h4': ('font-size': 25),
+		'h5': ('font-size': 21),
+		'h6': ('font-size': 19),
+	),
+);
+
+$paragraph-lineheight: inherit; // Paragraph line height
+$paragraph-margin-bottom: $global-margin; // Paragraph bottom margin
+
+// Inputs
+
+$input-color: $body-font-color; // Input text color
+$input-placeholder-color: $medium-gray; // Input placeholder color
+$input-font-size: rem-calc(16); // Input text size
+$input-line-height: $global-lineheight; // Input line height
+$input-background: $white; // Input background
+$input-background-focus: $light-gray; // Input background on focus
+$input-border: 1px solid $medium-gray; // Input border
+$input-border-focus: 1px solid $dark-gray; // Input border on focus
+$input-padding: rem-calc(10 15); // Input padding
+$select-background: $input-background; // Select background;
+
+// Responsive menu
+
+$accordionmenu-padding: $global-menu-padding;
+$accordionmenu-submenu-padding: $global-menu-padding; // Responsive menu item link padding
+
+// Title bar
+
+$titlebar-background: $primary-color; // Responsive menu bar background color
+$titlebar-color: $white; // Menu bar `Menu` word color
+
+/* ---------------------------------------
+	Additional Foundation style settings
+--------------------------------------- */
+
+//  Table of Contents:
+//
+//   1. Global
+//   2. Breakpoints
+//   3. The Grid
+//   4. Base Typography
+//   7. Accordion
+//   8. Accordion Menu
+//  11. Button
+//  16. Drilldown
+//  18. Dropdown Menu
+//  19. Flexbox Utilities
+//  20. Forms
+//  21. Label
+//  23. Menu
+//  25. Off-canvas
+//  46. Responsive Embed
+//  50. Table
+//  51. Tabs
+//  53. Title Bar
+//  56. Xy Grid
+
+// 1. Global
+// ---------
+
+$global-radius: 0;
+$global-flexbox: true;
+$global-button-cursor: pointer;
+$global-color-pick-contrast-tolerance: 0;
+$print-transparent-backgrounds: true;
+
+// 2. Breakpoints
+// --------------
+
+$breakpoints: (
+	small: 0,
+	medium: 641px,
+	large: 1025px,
+	xlarge: 1201px,
+	xxlarge: 1441px,
+);
+$breakpoint-classes: (small medium large xlarge);
+
+// 4. Base Typography
+// ------------------
+
+$header-font-style: normal;
+
+$small-font-size: 80%;
+
+$hr-width: $global-width;
+$hr-border: 1px solid $medium-gray;
+$hr-margin: rem-calc(20) auto;
+$list-lineheight: $paragraph-lineheight;
+$list-margin-bottom: $paragraph-margin-bottom;
+$defnlist-margin-bottom: $paragraph-margin-bottom;
+$blockquote-color: $body-font-color;
+$blockquote-padding: rem-calc(9 20 0 19);
+$blockquote-border: 1px solid $medium-gray;
+$cite-color: $body-font-color;
+$cite-pseudo-content: '';
+
+// 7. Accordion
+// ------------
+
+$accordion-background: $white;
+$accordion-plusminus: true;
+$accordion-title-font-size: inherit;
+$accordion-item-color: $primary-color;
+$accordion-item-background-hover: $light-gray;
+$accordion-item-padding: 1.25rem 1rem;
+$accordion-content-background: $white;
+$accordion-content-border: 1px solid $light-gray;
+$accordion-content-color: $body-font-color;
+$accordion-content-padding: 1rem;
+
+// 8. Accordion Menu
+// -----------------
+
+$accordionmenu-arrows: false;
+$accordionmenu-arrow-color: $white;
+$accordionmenu-submenu-toggle-background: null;
+$accordionmenu-submenu-toggle-width: 45px;
+$accordionmenu-submenu-toggle-height: $accordionmenu-submenu-toggle-width;
+
+// 11. Button
+// ----------
+
+$button-margin: 0;
+$button-color-alt: $black;
+$button-radius: $global-radius;
+
+// 16. Drilldown
+// -------------
+
+$drilldown-transition: transform 0.15s linear;
+$drilldown-arrows: true;
+$drilldown-padding: $global-menu-padding;
+$drilldown-nested-margin: 0;
+$drilldown-background: $white;
+$drilldown-submenu-padding: $drilldown-padding;
+$drilldown-submenu-background: $white;
+$drilldown-arrow-color: $primary-color;
+$drilldown-arrow-size: 6px;
+
+// 18. Dropdown Menu
+// -----------------
+
+$dropdownmenu-arrows: false;
+$dropdownmenu-min-width: 200px;
+$dropdownmenu-background: null;
+$dropdownmenu-submenu-background: transparent;
+$dropdownmenu-nested-margin: 0;
+$dropdownmenu-border: none;
+
+// 19. Flexbox Utilities
+// ---------------------
+
+$flex-source-ordering-count: 6;
+$flexbox-responsive-breakpoints: true;
+
+// 20. Forms
+// ---------
+
+$form-label-color: $body-font-color;
+$form-label-font-size: rem-calc(16);
+$form-label-line-height: 1.8;
+
+$input-shadow: none;
+$input-shadow-focus: none;
+$input-transition: box-shadow 0.5s, border-color 0.25s ease-in-out;
+$input-number-spinners: false;
+$input-radius: $global-radius;
+$select-radius: $global-radius;
+
+// 21. Label
+// ---------
+
+$label-font-size: 0.8rem;
+$label-padding: 0.33333rem 0.5rem;
+
+// 23. Menu
+// --------
+
+$menu-margin: 0;
+$menu-items-padding: $global-menu-padding;
+
+// 25. Off-canvas
+// --------------
+
+$offcanvas-sizes: (
+	small: 250px,
+);
+$offcanvas-vertical-sizes: (
+	small: 250px,
+);
+$offcanvas-background: $light-gray;
+$offcanvas-shadow: 0 0 10px rgba($black, 0.7);
+$offcanvas-inner-shadow-size: 20px;
+$offcanvas-inner-shadow-color: rgba($black, 0.25);
+$offcanvas-overlay-zindex: 11;
+$offcanvas-push-zindex: 12;
+$offcanvas-overlap-zindex: 13;
+$offcanvas-reveal-zindex: 12;
+$offcanvas-transition-length: 0.5s;
+$offcanvas-transition-timing: ease;
+$offcanvas-fixed-reveal: true;
+$offcanvas-exit-background: rgba($white, 0.25);
+$maincontent-class: 'off-canvas-content';
+
+// 46. Responsive Embed
+// --------------------
+
+$responsive-embed-margin-bottom: $paragraph-margin-bottom;
+$responsive-embed-ratios: (
+	default: 4 by 3,
+	widescreen: 16 by 9,
+);
+
+// 50. Table
+// ---------
+
+$table-background: $white;
+$table-color-scale: 20%;
+$table-border: 1px solid smart-scale($table-background, $table-color-scale);
+$table-padding: rem-calc(8 10 10);
+$table-hover-scale: 2%;
+$table-row-hover: darken($table-background, $table-hover-scale);
+$table-is-striped: false;
+$table-head-background: smart-scale($table-background, $table-color-scale / 4);
+$table-foot-background: smart-scale($table-background, $table-color-scale / 4);
+
+// 51. Tabs
+// --------
+
+$tab-margin: 0;
+$tab-background: $white;
+$tab-color: $primary-color;
+$tab-background-active: $light-gray;
+$tab-active-color: $primary-color;
+$tab-item-font-size: inherit;
+$tab-item-background-hover: $white;
+$tab-item-padding: 1.25rem 1.5rem;
+$tab-content-background: $white;
+$tab-content-border: $light-gray;
+$tab-content-color: $body-font-color;
+$tab-content-padding: 1rem;
+
+// 53. Title Bar
+// -------------
+
+$titlebar-padding: rem-calc(0);
+$titlebar-text-font-weight: bold;
+$titlebar-icon-spacing: rem-calc(15);
+
+// 56. Xy Grid
+// -----------
+
+$xy-grid: true;
+$grid-container: $global-width;
+$grid-columns: 12;
+$xy-block-grid-max: 8;
+
+$grid-padding-gutters: $grid-margin-gutters;
+$grid-container-padding: $grid-padding-gutters;
+

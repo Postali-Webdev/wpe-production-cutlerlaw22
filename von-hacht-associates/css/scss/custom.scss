@@ -1,0 +1,634 @@
+// Utils
+@import 'inc/mixins';
+@import 'inc/foundation-custom';
+// Plugins
+//@import 'plugins/font-awesome/fontawesome';
+//@import 'plugins/slick.scss';
+//@import 'plugins/jquery.fancybox.v2.scss'; // Uncomment this line and comment line above to use Fancybox v.2
+//@import 'plugins/jquery.fancybox.v3.scss';
+// Home slider
+//@import 'inc/slider';
+// Animation
+@import 'inc/animation';
+// WooCommerce
+//@import 'inc/woo';
+/* -----------------------------------------
+   WordPress Core Classes
+----------------------------------------- */
+@import 'inc/wp-core';
+
+/* -----------------------------------------
+   General fixes
+----------------------------------------- */
+
+html {
+  height: 100%;
+}
+
+body {
+  position: static !important;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  min-height: 100vh;
+}
+
+main {
+  display: block;
+}
+
+.grid-container {
+  width: 100%;
+}
+
+*:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------------------------------------
+	Typography / Forms / Inputs / Buttons
+--------------------------------------- */
+
+@import 'typography';
+
+/* -----------------------------------------
+    Contact Form
+----------------------------------------- */
+
+/*basic Gravity Form styles and fixes, if you dont need/use this -
+comment or delete styles below*/
+
+@import 'inc/gform';
+
+/* ------------------------------------
+    Basic Styles
+------------------------------------- */
+
+/* Preloader */
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.preloader {
+  position: fixed;
+  z-index: 100000000;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  visibility: visible;
+  opacity: 1;
+  background-color: #fff;
+  color: #222;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+
+  &__icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    &::before {
+      content: '\f1ce';
+      display: block;
+      font-family: $fa;
+      font-size: 40px;
+      font-weight: 900;
+
+      animation: spin 1s ease-in-out infinite;
+    }
+  }
+
+  &--hidden {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+/* Position center */
+
+.position-center {
+  @include position-center();
+}
+
+/* Pagination */
+
+ul.pagination {
+  @include list-unstyled;
+  margin: 15px 0;
+  text-align: center;
+
+  li {
+    display: inline-block;
+    margin: 0 3px;
+    padding: 0;
+    line-height: 1.5;
+
+    span, a {
+      display: block;
+      padding: 0 7px;
+
+      &.current {
+        display: block;
+        background: $main-color;
+        color: #fff;
+      }
+    }
+  }
+}
+
+/* Search form */
+
+.search {
+  position: relative;
+
+  .posts-list & {
+    margin-bottom: 40px;
+  }
+}
+
+.search__input {
+  padding-right: 75px;
+}
+
+.search__submit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  height: auto;
+  padding: 10px 15px;
+  cursor: pointer;
+  //font-size: 0;
+
+  &::after {
+    //content: "\f002";
+    font-family: $fa;
+    font-size: 20px;
+    font-weight: 900;
+  }
+}
+
+//use @extend %bgcover; to selector if you need background cover;
+
+%bgcover {
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: cover;
+}
+
+.bg-cover {
+  @extend %bgcover;
+}
+
+//use @extend %bgcontain; to selector if you need contain image in block;
+
+%bgcontain {
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+}
+
+.bg-contain {
+  @extend %bgcontain;
+}
+
+.stretched-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.rel-wrap {
+  position: relative;
+}
+
+.rel-content {
+  position: relative;
+  z-index: 2;
+}
+
+.of-cover, .stretched-img {
+  object-position: 50% 50%;
+  object-fit: cover;
+  font-family: 'object-fit: cover;';
+}
+
+.two-columns {
+  @include breakpoint(medium) {
+    columns: 2;
+  }
+}
+
+.three-columns {
+  @include breakpoint(medium) {
+    columns: 3;
+  }
+}
+
+.stretched-link::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  pointer-events: auto;
+  content: "";
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.jarallax {
+  position: relative;
+
+  > .jarallax-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.jarallax-inline {
+  position: relative;
+
+  > .jarallax-img {
+    position: relative;
+    z-index: -100;
+    display: block;
+    min-width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+img {
+  &[data-lazy-src] {
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  &.pre-lazyload {
+    opacity: 0;
+  }
+
+  &.lazyloaded {
+    opacity: 1;
+  }
+}
+
+/* ------------------------------------
+    Content Styles
+------------------------------------- */
+
+.main-content {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+/* Comments block */
+
+#comments {
+  padding-top: 30px;
+}
+
+.comment-list {
+  @include list-unstyled;
+  margin-bottom: 20px;
+}
+
+.comment {
+  position: relative;
+  margin-top: 15px;
+
+  .children {
+    list-style: none;
+  }
+}
+
+.comment-meta {
+  font-size: 14px;
+}
+
+.comment-metadata {
+  margin-top: 5px;
+  color: #666;
+}
+
+.comment-content {
+  margin-top: 15px;
+  padding-left: 15px;
+  border-left: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.reply {
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-align: right;
+}
+
+.comment-reply-link {
+  display: block;
+  padding: 0.33333rem 0.5rem;
+  border-radius: 0;
+  background: #777;
+  color: #fefefe;
+  font-size: 0.8rem;
+  line-height: 1;
+  white-space: nowrap;
+
+  &:hover, &:focus {
+    background-color: $main-color;
+    color: #fff;
+    text-decoration: none;
+  }
+}
+
+.comment-form {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.comment-notes,
+.comment-form-comment {
+  flex: 1 0 100%;
+}
+
+.comment-form-comment {
+  order: 1;
+}
+
+.comment-form-author,
+.comment-form-email,
+.comment-form-url {
+  flex: 1 1 auto;
+  flex-basis: calc(33.3333% - 20px);
+
+  @include breakpoint(small down) {
+    flex-basis: 100%;
+  }
+}
+
+.comment-form-author,
+.comment-form-email {
+  @include breakpoint(medium) {
+    margin-right: 30px;
+  }
+}
+
+.comment-form-cookies-consent,
+.comment-form .form-submit {
+  order: 2;
+}
+
+.comment-form .form-submit {
+  flex-basis: 100%;
+}
+
+/* 404 page */
+
+.not-found {
+  padding-top: 100px;
+  padding-bottom: 100px;
+
+  .label {
+    background-color: $main-color;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: darken($main-color, 8);
+      color: #fff;
+    }
+  }
+}
+
+.team-tab {
+
+  &-list {
+    @include list-unstyled;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: stretch;
+    align-content: stretch;
+    margin-bottom: 40px;
+    @include breakpoint(small down) {
+      margin-bottom: 20px;
+
+    }
+
+    li {
+      font-size: 17px;
+      color: $green;
+      padding: 10px 46px 10px 37px;
+      font-weight: 700;
+      position: relative;
+      margin-bottom: 10px;
+      transition: 0.2s all ease-out;
+      border-bottom: 1px solid transparent;
+      @include breakpoint(small down) {
+        width: 100%;
+        padding: 5px 45px 5px 0;
+      }
+
+      &:after {
+        content: '';
+        position: absolute;
+        width: 12px;
+        height: 5px;
+        background-image: url(../../images/arrow.svg);
+        -webkit-background-size: contain;
+        background-size: contain;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        top: calc(50% - 3px);
+        right: 20px;
+        transition: 0.2s all ease-out;
+      }
+
+      &.open {
+        border-bottom: 1px solid $green;
+
+        &:after {
+          transform: rotate(180deg);
+        }
+
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &-content {
+    display: none;
+
+    &.open {
+      display: block;
+    }
+  }
+}
+
+.site-container {
+  font-family: $font;
+}
+
+.post-about-us {
+  padding-bottom: 40px;
+  @include breakpoint(small down) {
+    padding-top: 10px;
+    .grid-container {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+  }
+}
+
+
+body .sidebar .widget {
+  padding: 0 10px;
+  @include breakpoint(small down) {
+    padding: 0;
+
+  }
+}
+
+.responsive-menu-open {
+  &:before {
+    position: fixed;
+    z-index: 105;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    content: '';
+    background-color: rgba(31, 31, 31, 0.75);
+  }
+
+  button#responsive-menu-button {
+    background-color: transparent !important;
+  }
+}
+
+body .entry-title a {
+  /*basic heading styles*/
+  font-style: italic;
+  font-weight: 700;
+  font-size: 41px;
+  color: $blue;
+
+  &:hover {
+    color: $green;
+  }
+
+  @include breakpoint(small down) {
+    font-size: 24px;
+
+  }
+}
+
+.default-page-container {
+  @include breakpoint(medium down) {
+    margin-bottom: 60px;
+
+  }
+  @include breakpoint(small down) {
+    position: relative;
+    margin-bottom: 45px;
+    padding-bottom: 45px;
+    &:after {
+      position: absolute;
+      bottom: 0;
+      content: '';
+      width: calc(100% - 20px);
+      right: 10px;
+      background-color: $grey;
+      height: 2px;
+    }
+
+  }
+
+}
+
+.content-sidebar-wrap::before, .content-sidebar-wrap::after {
+  display: table;
+  content: ' ';
+  -ms-flex-preferred-size: 0;
+  flex-basis: 0;
+  -webkit-box-ordinal-group: 2;
+  -ms-flex-order: 1;
+  order: 1;
+}
+
+.content-sidebar-wrap::after {
+  clear: both;
+}
+
+.sidebar.sidebar-primary.widget-area {
+  @include breakpoint(large up) {
+    position: sticky;
+    top: 120px;
+
+  }
+}
+
+/* ---------------------------------------
+	Repeatable blocks
+--------------------------------------- */
+
+@import 'repeatable-blocks';
+
+/* ---------------------------------------
+	Header
+--------------------------------------- */
+
+@import 'header';
+
+/* ---------------------------------------
+	Sidebar
+--------------------------------------- */
+
+//@import 'sidebar';
+
+/* ---------------------------------------
+	Footer
+--------------------------------------- */
+
+@import 'footer';
+
+/*---------------------------------------
+	TMPL: Home page
+---------------------------------------*/
+
+@import 'templates/home';
+
+/* ---------------------------------------
+	Page: Blog
+--------------------------------------- */
+
+//@import 'templates/blog';
+
+/* ---------------------------------------
+	TMPL: Default page
+--------------------------------------- */
+
+@import 'templates/default';
+
+/* ---------------------------------------
+	TMPL: Contact page
+--------------------------------------- */
+
+//@import 'templates/contact';
+

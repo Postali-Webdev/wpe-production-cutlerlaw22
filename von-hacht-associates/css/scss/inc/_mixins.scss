@@ -1,0 +1,189 @@
+// Replace letters
+@function str-replace($string, $search, $replace: '') {
+	$index: str-index($string, $search);
+
+	@if $index {
+		@return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+	}
+
+	@return $string;
+}
+
+// Encode symbols
+@function url-encode($string) {
+	$map: (
+		"%": "%25",
+		"<": "%3C",
+		">": "%3E",
+		" ": "%20",
+		"!": "%21",
+		"*": "%2A",
+		"'": "%27",
+		'"': "%22",
+		"(": "%28",
+		")": "%29",
+		";": "%3B",
+		":": "%3A",
+		"@": "%40",
+		"&": "%26",
+		"=": "%3D",
+		"+": "%2B",
+		"$": "%24",
+		",": "%2C",
+		"/": "%2F",
+		"?": "%3F",
+		"#": "%23",
+		"[": "%5B",
+		"]": "%5D"
+	);
+
+	$new: $string;
+
+	@each $search, $replace in $map {
+		$new: str-replace($new, $search, $replace);
+	}
+
+	@return $new;
+}
+
+// Format the SVG as a URL
+@function inline-svg($string) {
+	@return url('data:image/svg+xml,#{url-encode($string)}');
+}
+
+// Creates a menu icon with a set width, height, number of bars, and colors.
+// The mixin uses the height of the icon and the weight of the bars to
+// determine spacing. <div class="docs-example-burger"></div>
+//
+// @param {Color} $color [$black] - Color to use for the icon.
+// @param {Color} $color-hover [gray] - Color of hovered icon.
+// @param {Number} $width [20px] - Width of the icon.
+// @param {Number} $height [16px] - Height of the icon.
+// @param {Number} $weight [2px] - Height of individual bars in the icon.
+// @param {Number} $bars [3] - Number of bars in the icon.
+@mixin menu-icon(
+	$color: $black,
+	$color-hover: $dark-gray,
+	$width: 20px,
+	$height: 16px,
+	$weight: 2px,
+	$radius: 0,
+	$bars: 3
+) {
+	// box-shadow CSS output
+	$shadow: ();
+	$hover-shadow: ();
+
+	// Spacing between bars is calculated based on the total height
+	// of the icon and the weight of each bar
+	$spacing: ($height - ($weight * $bars)) / ($bars - 1);
+
+	@if unit($spacing) == 'px' {
+		$spacing: floor($spacing);
+	}
+
+	// Icon container
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+	width: $width;
+	height: $height;
+	cursor: pointer;
+
+	span {
+		top: 0;
+		display: block;
+
+		&::before, &::after {
+			content: "";
+			display: block;
+		}
+
+		&, &::before, &::after {
+			position: absolute;
+			left: 0;
+			width: 100%;
+			height: $weight;
+			background-color: $color;
+			border-radius: $radius;
+			-webkit-transition-property: -webkit-transform, opacity;
+			transition-property: transform, opacity;
+			transition-duration: 0.15s;
+			transition-timing-function: ease;
+		}
+
+		&::before {
+			top: $spacing + $weight;
+		}
+
+		&::after {
+			top: ($spacing + $weight) * 2;
+		}
+
+		&:hover {
+			&, &::before, &::after {
+				background-color: $color-hover;
+			}
+		}
+	}
+
+	&.is-active {
+		span {
+			$y-offset: $spacing + $weight;
+
+			transform: translate3d(0, $y-offset, 0) rotate(45deg);
+
+			&::before {
+				transform: rotate(-45deg) translate3d($width / -7, $spacing * -1, 0);
+				display: none;
+				//opacity: 0;
+			}
+
+			&::after {
+				transform: translate3d(0, $y-offset * -2, 0) rotate(-90deg);
+			}
+		}
+	}
+}
+
+// Remove bullets and spacing of the list
+@mixin list-unstyled {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+// Place element in the center of the parent element
+@mixin position-center {
+	position: absolute;
+	top: 50%;
+	right: 50%;
+	transform: translate(50%, -50%);
+}
+
+// Apply styles to the last row of grid elements depends on columns number
+@mixin last-grid-row($columns) {
+	&:nth-child(#{$columns}n+1):nth-last-child(-n+#{$columns}),
+	&:nth-child(#{$columns}n+1):nth-last-child(-n+#{$columns}) ~ * {
+		@content;
+	}
+}
+
+// Default wordpress spinner animation on loading
+@mixin loader() {
+	&::after {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		display: block;
+		width: 16px;
+		height: 16px;
+		margin-top: -8px;
+		margin-left: -8px;
+		background-image: inline-svg('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 91.4 91.4"><circle cx="45.7" cy="45.7" r="45.7"/><circle cx="45.7" cy="24.4" r="12.5" fill="#fff"/></svg>');
+		background-position: 50% 50%;
+		background-size: cover;
+		animation: spin 1s ease-in-out infinite;
+	}
+}

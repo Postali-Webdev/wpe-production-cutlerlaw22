@@ -1,0 +1,83 @@
+/* ---------------------------------------
+	Social networks
+--------------------------------------- */
+
+.stay-tuned {
+	@include list-unstyled;
+
+	margin-right: -5px;
+	margin-left: -5px;
+	font-size: 0;
+}
+
+.stay-tuned__item {
+	display: inline-block;
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
+.stay-tuned__link {
+	display: block;
+
+	.fab {
+		display: block;
+		font-size: 16px;
+	}
+}
+
+/* ---------------------------------------
+	Side by side
+--------------------------------------- */
+
+.sbs-block {
+	position: relative;
+	overflow: hidden;
+	padding-top: 50px;
+	padding-bottom: 50px;
+
+	&--reverse {
+		.cell.sbs-block__img-wrap {
+			right: 50%;
+			left: 0;
+		}
+	}
+}
+
+.sbs-block__content-wrap {
+	display: flex;
+	flex-direction: column;
+}
+
+.sbs-block__content {
+	display: flex;
+	align-items: center;
+
+	@include breakpoint(medium) {
+		min-height: 400px;
+	}
+}
+
+.sbs-block__content-inner {
+	width: 100%;
+}
+
+.cell.sbs-block__img-wrap {
+	@include breakpoint(medium) {
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 50%;
+		width: 50%;
+		height: 100%;
+		margin: 0;
+	}
+
+	@include breakpoint(small down) {
+		margin-bottom: 25px;
+	}
+}
+
+.sbs-block__img {
+	width: 100%;
+	height: 100%;
+}
