@@ -659,4 +659,47 @@ function wpseo_breadcrumb_remove_limited( $links ) {
     }
 }
 add_action('check_form_entries', 'retrieve_latest_gform_submissions');
+
+/**
+ * Disable Theme/Plugin File Editors in WP Admin
+ * - Hides the submenu items
+ * - Blocks direct access to editor screens
+ */
+function postali_disable_file_editors_menu() {
+    // Remove Theme File Editor from Appearance menu
+    remove_submenu_page( 'themes.php', 'theme-editor.php' );
+    // Optional: also remove Plugin File Editor from Plugins menu
+    remove_submenu_page( 'plugins.php', 'plugin-editor.php' );
+}
+add_action( 'admin_menu', 'postali_disable_file_editors_menu', 999 );
+
+// Block direct access to the editors even if someone knows the URL
+function postali_block_file_editors_direct_access() {
+    wp_die( __( 'File editing through the WordPress admin is disabled.' ), 403 );
+}
+add_action( 'load-theme-editor.php', 'postali_block_file_editors_direct_access' );
+add_action( 'load-plugin-editor.php', 'postali_block_file_editors_direct_access' );
+
+/**
+ * Disable the Additional CSS panel in the Customizer.
+ * Primary method: remove the custom_css component early in load.
+ */
+function postali_disable_customizer_additional_css_component( $components ) {
+    $key = array_search( 'custom_css', $components, true );
+    if ( false !== $key ) {
+        unset( $components[ $key ] );
+    }
+    return $components;
+}
+add_filter( 'customize_loaded_components', 'postali_disable_customizer_additional_css_component' );
+
+/**
+ * Fallback: remove the Additional CSS section if it's present.
+ */
+function postali_remove_customizer_additional_css_section( $wp_customize ) {
+    if ( method_exists( $wp_customize, 'remove_section' ) ) {
+        $wp_customize->remove_section( 'custom_css' );
+    }
+}
+add_action( 'customize_register', 'postali_remove_customizer_additional_css_section', 20 );
 }
