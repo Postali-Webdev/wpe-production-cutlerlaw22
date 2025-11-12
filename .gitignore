@@ -34,7 +34,6 @@ wp-config.php
 /xmlrpc.php
 
 # Default Themes
-index.php
 twentytwentyfive
 twentytwentyfour
 twentytwentythree
