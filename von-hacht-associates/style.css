@@ -1455,6 +1455,33 @@ img.alignright,
     padding: 0 20px 10px;
 }
 
+.address-row .footer__address{
+    padding-bottom: 0;
+}
+
+#menu-footer-nav-menu {
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+#menu-footer-nav-menu li a {
+    font-size: 18px;
+    padding: 0;
+}
+.footer__single-page-content .footer__single-page-copyright {
+    margin-top: 30px !important;
+}
+.footer__single-page-content #menu-footer-nav-menu {
+    margin-top: 15px;
+}
+@media screen and (max-width: 1024px) {
+    .footer__single-page-content #menu-footer-nav-menu {
+        justify-content: center;
+    }
+}
+
 
 /* # Content Area
 ---------------------------------------------------------------------------------------------------- */

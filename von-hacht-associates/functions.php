@@ -209,8 +209,22 @@ function sp_custom_footer()
                         <?php endif; ?>
                         <?php if (get_field('address_link', 'option') || get_field('address_text', 'option')):
                             $text = get_field('address_text', 'option') ? get_field('address_text', 'option') : 'Address'; ?>
-                            <a href="<?php echo get_field('address_link', 'option') ?>" target="_blank" class="footer__address"><?php echo $text ?></a>
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3738.827716624816!2d-112.041907!3d43.490312!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x535459459952dfe9%3A0x79ec5ab9326479ad!2sCutler%20Law%20Office%2C%20P.A.!5e1!3m2!1sen!2sus!4v1761074765304!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+                            <div class="address-row">
+                                <a href="<?php echo get_field('address_link', 'option') ?>" target="_blank" class="footer__address"><?php echo $text ?></a>
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3738.827716624816!2d-112.041907!3d43.490312!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x535459459952dfe9%3A0x79ec5ab9326479ad!2sCutler%20Law%20Office%2C%20P.A.!5e1!3m2!1sen!2sus!4v1761074765304!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
+
+                            <?php if ( has_nav_menu( 'footer-links' ) ) : ?>
+                                <h3>Quick Links</h3>
+                                <?php
+                                    wp_nav_menu( array(
+                                        'container'      => false,
+                                        'theme_location' => 'footer-links',
+                                        'fallback_cb'    => false,
+                                    ) );
+                                ?>
+                            <?php endif; ?>
 
                         <?php endif; ?>
 
@@ -285,6 +299,16 @@ function sp_custom_footer()
 
                     <?php if (get_field('copyright', 'option')): ?>
                         <div class="cell large-4 medium-12  text-left footer__single-page-copyright">
+                            <?php if ( has_nav_menu( 'footer-links' ) ) : ?>
+                                <h3>Quick Links</h3>
+                                <?php
+                                    wp_nav_menu( array(
+                                        'container'      => false,
+                                        'theme_location' => 'footer-links',
+                                        'fallback_cb'    => false,
+                                    ) );
+                                ?>
+                            <?php endif; ?>
                             <div class="copyright copyright--single-page">
                                 <?php the_field('copyright', 'option') ?>
                             </div>
@@ -583,7 +607,7 @@ function sdt_remove_ver_css_js( $src, $handle )
 }
 
 
-define( 'CHILD_THEME_VERSION', filemtime( get_stylesheet_directory() . '/style.css' ) );
+define( CHILD_THEME_VERSION, filemtime( get_stylesheet_directory() . '/style.css' ) );
 
 add_filter( 'stylesheet_uri', 'child_stylesheet_uri' );
 /**
@@ -703,3 +727,12 @@ function postali_remove_customizer_additional_css_section( $wp_customize ) {
 }
 add_action( 'customize_register', 'postali_remove_customizer_additional_css_section', 20 );
 }
+
+function custom_nav_menus() {
+    register_nav_menus(
+        array(
+            'footer-links'  => __( 'Custom Footer Nav' )
+        )
+    );
+}
+add_action('init', 'custom_nav_menus');
