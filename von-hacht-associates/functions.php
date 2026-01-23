@@ -193,13 +193,29 @@ function sp_custom_footer()
             <div class="grid-container">
                 <div class="grid-x grid-margin-x">
 
-                    <?php if ($form = get_field('form_home_page', 'option')): ?>
-                        <div class="cell large-5  medium-6  medium-order-2 footer__form-container">
-                            <div class="footer__form">
-                                <?php echo $form ?>
-                            </div>
 
+                    <?php if( get_field('enable_lawmatics_form_embed', 'option') ) : ?>
+                    <div class="cell large-5  medium-6  medium-order-2 footer__form-container">
+                        <div class="footer__form">
+                            <!-- Start Lawmatics Embedded Snippet -->
+                            <script id="lm-embedded-script">
+                            !function(e,t,n,a,s,c,i){if(!e[s]){i=e[s]=function(){i.process?i.process.apply(i,arguments):i.queue.push(arguments)},i.queue=[],i.t=1*new Date;var o=t.createElement(n);o.async=1,o.src=a+"?t="+Math.ceil(new Date/c)*c;var r=t.getElementsByTagName(n)[0];r.parentNode.insertBefore(o,r)}}(window,document,"script","https://navi.lawmatics.com/intake.min.js","lm_intake",864e5),lm_intake("c14eb877-e548-441a-af61-826864189b15", "lm-embedded-script", {});
+                            </script>
+                            <!-- End Lawmatics Embedded Snippet -->
                         </div>
+                    </div>
+                    
+                    <?php else : ?>
+
+                        <?php if ($form = get_field('form_home_page', 'option')): ?>
+                            <div class="cell large-5  medium-6  medium-order-2 footer__form-container">
+                                <div class="footer__form">
+                                    <?php echo $form ?>
+                                </div>
+
+                            </div>
+                        <?php endif; ?>
+
                     <?php endif; ?>
 
                     <div class="cell large-5 medium-6 large-offset-1 medium-order-1 text-left footer__content-container">
