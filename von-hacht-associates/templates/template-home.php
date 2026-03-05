@@ -31,7 +31,7 @@ $background_mobile = get_field('background_mobile', get_the_ID());
                 </div>
             <?php endif; ?>
             <?php if ($item2 = get_field('banner_sub_title')): ?>
-                <h3 class="banner__sub-title"><?php echo $item2 ?></h3>
+                <p class="banner__sub-title"><?php echo $item2 ?></p>
             <?php endif; ?>
             <?php if ($link = get_field('banner_button')): ?>
                 <div class="button__container">
@@ -45,6 +45,20 @@ $background_mobile = get_field('background_mobile', get_the_ID());
         </div>
     </div>
 </section>
+
+<?php if ($quisque_vehicula_mauris = get_field('quisque_vehicula_mauris')): ?>
+    <section class="quisque_vehicula_mauris list-decor no-image intro-copy">
+        <div>
+            <div class="banner__content">
+                <div class="banner__grid">
+                    <div class="more more-style">
+                        <?php echo $quisque_vehicula_mauris ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<?php endif; ?>
 
 <?php if (have_rows('logos')): ?>
     <section class="logos-part">
@@ -144,6 +158,104 @@ $background_mobile = get_field('background_mobile', get_the_ID());
     </section>
 <?php endif; ?>
 
+<?php
+$posts = get_field('semper_portitor_sed');
+if ($posts): ?>
+    <?php if (count($posts) > 1): ?>
+        <section class="semper_portitor_sed">
+            <div class="grid-container fluid">
+                <div class="grid-x grid-margin-x align-center">
+                    <div class="cell semper_portitor_sed__title text-center">
+                        <?php if ($semper_portitor_sed_title = get_field('semper_portitor_sed_title')): ?>
+                            <h2><?php echo $semper_portitor_sed_title ?></h2>
+                        <?php endif; ?>
+                    </div>
+
+                    <?php foreach ($posts as $p): // variable must NOT be called $post (IMPORTANT) ?>
+                        <div class="cell large-3 medium-6 small-6 semper_portitor_sed__single">
+                            <?php if (get_field('mobile_image', $p->ID)): ?>
+                                <a href="<?php echo get_permalink($p->ID); ?>"
+                                   style="background-image: url(<?php echo get_the_post_thumbnail_url($p->ID) ?>);"
+                                   class="semper_portitor_sed__post bg-cover hide-for-small-only">
+                                    <span class="semper_portitor_sed__post-title"><?php echo get_the_title($p->ID); ?></span>
+                                </a>
+                                <a href="<?php echo get_permalink($p->ID); ?>"
+                                   style="background-image: url(<?php echo get_field('mobile_image', $p->ID)['url'] ?>);"
+                                   class="semper_portitor_sed__post bg-cover show-for-small-only">
+                                    <span class="semper_portitor_sed__post-title"><?php echo get_the_title($p->ID); ?></span>
+                                </a>
+                            <?php else: ?>
+                                <a href="<?php echo get_permalink($p->ID); ?>"
+                                   style="background-image: url(<?php echo get_the_post_thumbnail_url($p->ID) ?>);"
+                                   class="semper_portitor_sed__post bg-cover">
+                                    <span class="semper_portitor_sed__post-title"><?php echo get_the_title($p->ID); ?></span>
+                                </a>
+                            <?php endif; ?>
+
+                        </div>
+                    <?php endforeach; ?>
+
+                    <?php if ($link2 = get_field('all_team_link')): ?>
+                        <div class="cell text-center semper_portitor_sed__button">
+                            <a class="button" href="<?php echo $link2['url']; ?>" target="<?php if ($link2['target']) {
+                                echo $link2['target'];
+                            } else {
+                                echo '_parent';
+                            } ?>"><?php echo $link2['title']; ?></a>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </section>
+    <?php else: ?>
+
+        <section class="lacinia_mattis attorney-bio">
+            <div class="grid-container">
+                <div class="grid-x grid-margin-x">
+                    <?php foreach ($posts as $p): // variable must NOT be called $post (IMPORTANT) ?>
+                        <?php if ($image = /*get_the_post_thumbnail_url($p -> ID)*/
+                            get_field('mobile_image', $p->ID)): ?>
+                            <div class="cell large-5 text-right">
+                                <div class="lacinia_mattis__images-container lacinia_mattis__images-container--team">
+                                    <div>
+                                        <div class="lacinia_mattis__images lacinia_mattis__images--team bg-cover "
+                                             style="background-image: url(<?php /*echo $image*/
+                                             echo esc_url($image['url']); ?>);">
+
+                                            <div class="lacinia_mattis__images_border-white-container">
+                                                <div>
+                                                    <div class="lacinia_mattis__images_border-white lacinia_mattis__images_border-white--team"></div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                        <div class="cell large-7">
+                            <div class="lacinia_mattis__content lacinia_mattis__content--team">
+                                <?php if ($title = get_the_title($p->ID)): ?>
+                                    <h2><?php echo $title; ?></h2>
+                                <?php endif; ?>
+                                <?php if ($text = get_field('excerpt', $p->ID)): ?>
+                                    <?php echo $text; ?>
+                                <?php endif; ?>
+                                <?php if ($link = get_field('all_team_link')): ?>
+                                    <a class="button" href="<?php echo esc_url($link['url']); ?>"
+                                       target="<?php echo esc_attr($link['target'] ? $link['target'] : '_self'); ?>"><?php echo esc_html($link['title']); ?></a>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </section>
+
+    <?php endif; ?>
+<?php endif; ?>
 
 <section class="vivamus_massa">
     <div class="grid-container">
@@ -190,19 +302,7 @@ $background_mobile = get_field('background_mobile', get_the_ID());
     </div>
 </section>
 
-<?php if ($quisque_vehicula_mauris = get_field('quisque_vehicula_mauris')): ?>
-    <section class="banner quisque_vehicula_mauris list-decor no-image">
-        <div class="banner__rotate bg-cover ">
-            <div class="banner__content">
-                <div class="banner__grid">
-                    <div class="more more-style">
-                        <?php echo $quisque_vehicula_mauris ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-<?php endif; ?>
+
 
 <?php if (get_field('lacinia_mattis') || get_field('lacinia_mattis_image')): ?>
     <section class="lacinia_mattis">
@@ -244,7 +344,7 @@ $background_mobile = get_field('background_mobile', get_the_ID());
 <?php endif; ?>
 
 <?php if (get_field('contact_content')): ?>
-    <section class="banner contact-banner list-decor no-image">
+    <section class="banner contact-banner list-decor no-image contact-block">
         <div class="banner__rotate bg-cover">
             <div class="banner__content">
                 <div class="grid-container fluid">
@@ -286,7 +386,7 @@ $background_mobile = get_field('background_mobile', get_the_ID());
 </section>
 
 <?php if ($mvl_image = get_field('mvl_image')): ?>
-    <section class="banner mvl list-decor no-image">
+    <section class="banner mvl list-decor no-image experience-block">
         <div class="banner__rotate bg-cover ">
             <div class="banner__content">
                 <div class="grid-container fluid">
@@ -361,7 +461,7 @@ $background_mobile = get_field('background_mobile', get_the_ID());
 <?php endif; ?>
 
 <?php if ($phasellus_sapien_orci = get_field('phasellus_sapien_orci')): ?>
-    <section class="phasellus_sapien_orci">
+    <section class="phasellus_sapien_orci select-attorney-block">
         <div class="grid-container">
             <div class="grid-x grid-margin-x">
                 <div class="cell large-8 large-offset-2">
@@ -374,124 +474,12 @@ $background_mobile = get_field('background_mobile', get_the_ID());
     </section>
 <?php endif; ?>
 
-
-<?php
-$posts = get_field('semper_portitor_sed');
-if ($posts): ?>
-    <?php if (count($posts) > 1): ?>
-        <section class="semper_portitor_sed">
-            <div class="grid-container fluid">
-                <div class="grid-x grid-margin-x align-center">
-                    <div class="cell semper_portitor_sed__title text-center">
-                        <?php if ($semper_portitor_sed_title = get_field('semper_portitor_sed_title')): ?>
-                            <h2><?php echo $semper_portitor_sed_title ?></h2>
-                        <?php endif; ?>
-                    </div>
-
-                    <?php foreach ($posts as $p): // variable must NOT be called $post (IMPORTANT) ?>
-                        <div class="cell large-3 medium-6 small-6 semper_portitor_sed__single">
-                            <?php if (get_field('mobile_image', $p->ID)): ?>
-                                <a href="<?php echo get_permalink($p->ID); ?>"
-                                   style="background-image: url(<?php echo get_the_post_thumbnail_url($p->ID) ?>);"
-                                   class="semper_portitor_sed__post bg-cover hide-for-small-only">
-                                    <span class="semper_portitor_sed__post-title"><?php echo get_the_title($p->ID); ?></span>
-                                </a>
-                                <a href="<?php echo get_permalink($p->ID); ?>"
-                                   style="background-image: url(<?php echo get_field('mobile_image', $p->ID)['url'] ?>);"
-                                   class="semper_portitor_sed__post bg-cover show-for-small-only">
-                                    <span class="semper_portitor_sed__post-title"><?php echo get_the_title($p->ID); ?></span>
-                                </a>
-                            <?php else: ?>
-                                <a href="<?php echo get_permalink($p->ID); ?>"
-                                   style="background-image: url(<?php echo get_the_post_thumbnail_url($p->ID) ?>);"
-                                   class="semper_portitor_sed__post bg-cover">
-                                    <span class="semper_portitor_sed__post-title"><?php echo get_the_title($p->ID); ?></span>
-                                </a>
-                            <?php endif; ?>
-
-                        </div>
-                    <?php endforeach; ?>
-
-                    <?php if ($link2 = get_field('all_team_link')): ?>
-                        <div class="cell text-center semper_portitor_sed__button">
-                            <a class="button" href="<?php echo $link2['url']; ?>" target="<?php if ($link2['target']) {
-                                echo $link2['target'];
-                            } else {
-                                echo '_parent';
-                            } ?>"><?php echo $link2['title']; ?></a>
-                        </div>
-                    <?php endif; ?>
-                </div>
-            </div>
-        </section>
-    <?php else: ?>
-
-        <section class="lacinia_mattis">
-            <div class="grid-container">
-                <div class="grid-x grid-margin-x">
-                    <?php foreach ($posts as $p): // variable must NOT be called $post (IMPORTANT) ?>
-                        <?php if ($image = /*get_the_post_thumbnail_url($p -> ID)*/
-                            get_field('mobile_image', $p->ID)): ?>
-                            <div class="cell large-5 text-right">
-                                <div class="lacinia_mattis__images-container lacinia_mattis__images-container--team">
-                                    <div>
-                                        <div class="lacinia_mattis__images lacinia_mattis__images--team bg-cover "
-                                             style="background-image: url(<?php /*echo $image*/
-                                             echo esc_url($image['url']); ?>);">
-
-                                            <div class="lacinia_mattis__images_border-white-container">
-                                                <div>
-                                                    <div class="lacinia_mattis__images_border-white lacinia_mattis__images_border-white--team"></div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                        <?php endif; ?>
-                        <div class="cell large-7">
-                            <div class="lacinia_mattis__content lacinia_mattis__content--team">
-                                <?php if ($title = get_the_title($p->ID)): ?>
-                                    <h2><?php echo $title; ?></h2>
-                                <?php endif; ?>
-                                <?php if ($text = get_field('excerpt', $p->ID)): ?>
-                                    <?php echo $text; ?>
-                                <?php endif; ?>
-                                <?php if ($link = get_field('all_team_link')): ?>
-                                    <a class="button" href="<?php echo esc_url($link['url']); ?>"
-                                       target="<?php echo esc_attr($link['target'] ? $link['target'] : '_self'); ?>"><?php echo esc_html($link['title']); ?></a>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-        </section>
-
-    <?php endif; ?>
-<?php endif; ?>
-
-<?php if (get_field('contact_content')): ?>
-    <section class="banner contact-banner list-decor no-image">
-        <div class="banner__rotate bg-cover">
-            <div class="banner__content">
-                <div class="grid-container fluid">
-                    <?php the_field('contact_content'); ?>
-                </div>
-            </div>
-        </div>
-    </section>
-<?php endif; ?>
-
 <section class="tabs-part">
     <div class="tabs ">
         <?php if ($laoreet_dolore_title = get_field('laoreet_dolore_title')): ?>
             <div class="grid-container">
                 <div class="grid-x grid-margin-x">
-                    <div class="cell">
+                    <div class="cell large-8 large-offset-2">
                         <h2><?php echo $laoreet_dolore_title ?></h2>
                     </div>
                 </div>
@@ -501,26 +489,32 @@ if ($posts): ?>
         <?php if (have_rows('faq')): ?>
             <?php while (have_rows('faq')): the_row(); ?>
                 <div class="single_tab">
-                    <div class="single_tab__container">
-                        <div class="single_tab__title">
-                            <?php if ($title = get_sub_field('title')): ?>
-                                <h3><?php echo $title ?></h3>
-                                <p class="hide-in-open">
-                                    <?php echo wp_trim_words(get_sub_field('content'), 12, '...'); ?>
-                                </p>
+                    <div class="grid-container">
+                        <div class="grid-x grid-margin-x">
+                            <div class="cell large-8 large-offset-2">
+                                <div class="single_tab__container">
+                                    <div class="single_tab__title">
+                                        <?php if ($title = get_sub_field('title')): ?>
+                                            <h3><?php echo $title ?></h3>
+                                            <p class="hide-in-open">
+                                                <?php echo wp_trim_words(get_sub_field('content'), 12, '...'); ?>
+                                            </p>
 
-                            <?php endif; ?>
-                            <span class="icon_tab"></span>
-                        </div>
-                        <div class="single_tab__content">
-                            <p><?php the_sub_field('content') ?></p>
-                            <?php if ($link = get_sub_field('link')): ?>
-                                <a class="button" href="<?php echo esc_url($link['url']); ?>"
-                                   target="<?php echo esc_attr($link['target'] ? $link['target'] : '_self'); ?>"><?php echo esc_html($link['title']); ?></a>
-                            <?php endif; ?>
+                                        <?php endif; ?>
+                                        <span class="icon_tab"></span>
+                                    </div>
+                                    <div class="single_tab__content">
+                                        <p><?php the_sub_field('content') ?></p>
+                                        <?php if ($link = get_sub_field('link')): ?>
+                                            <a class="button" href="<?php echo esc_url($link['url']); ?>"
+                                            target="<?php echo esc_attr($link['target'] ? $link['target'] : '_self'); ?>"><?php echo esc_html($link['title']); ?></a>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
                         </div>
                     </div>
-                </div><!--end of .columns -->
+                </div>
+            </div><!--end of .columns -->
             <?php endwhile; ?>
         <?php endif; ?>
     </div>

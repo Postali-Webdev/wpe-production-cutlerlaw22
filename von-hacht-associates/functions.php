@@ -196,7 +196,23 @@ function sp_custom_footer()
 
                     <?php if( get_field('enable_lawmatics_form_embed', 'option') ) : ?>
                     <div class="cell large-5  medium-6  medium-order-2 footer__form-container">
+                        <div class="footer-links">
+
+                            <?php if ( has_nav_menu( 'footer-links' ) ) : ?>
+                                <?php
+                                    wp_nav_menu( array(
+                                        'container'      => false,
+                                        'theme_location' => 'footer-links',
+                                        'fallback_cb'    => false,
+                                    ) );
+                                ?>
+                            <?php endif; ?>
+
+                        </div>
+                    
+                    
                         <div class="footer__form">
+                            <h3>Contact Our Firm</h3>
                             <!-- Start Lawmatics Embedded Snippet -->
                             <script id="lm-embedded-script">
                             !function(e,t,n,a,s,c,i){if(!e[s]){i=e[s]=function(){i.process?i.process.apply(i,arguments):i.queue.push(arguments)},i.queue=[],i.t=1*new Date;var o=t.createElement(n);o.async=1,o.src=a+"?t="+Math.ceil(new Date/c)*c;var r=t.getElementsByTagName(n)[0];r.parentNode.insertBefore(o,r)}}(window,document,"script","https://navi.lawmatics.com/intake.min.js","lm_intake",864e5),lm_intake("c14eb877-e548-441a-af61-826864189b15", "lm-embedded-script", {});
@@ -227,38 +243,36 @@ function sp_custom_footer()
                             $text = get_field('address_text', 'option') ? get_field('address_text', 'option') : 'Address'; ?>
 
                             <div class="address-row">
-                                <a href="<?php echo get_field('address_link', 'option') ?>" target="_blank" class="footer__address"><?php echo $text ?></a>
+
+                                <div class="columns">
+                                    <div class="column1">
+                                        <a href="<?php echo get_field('address_link', 'option') ?>" target="_blank" class="footer__address"><?php echo $text ?></a>
+                                    </div>
+                                    <div class="column2">
+
+                                        <a class="phone-link" href="tel:208-525-4858">208-525-4858</a>
+
+                                        <?php if (have_rows('social_icons', 'option')) : ?>
+                                            <ul class="socials">
+                                                <?php while (have_rows('social_icons', 'option')) : the_row(); ?>
+                                                    <?php
+                                                    $social_icon = get_sub_field('social_icon');
+                                                    $social_link = get_sub_field('social_link');
+                                                    ?>
+                                                    <li>
+                                                        <a class="social-icon" href="<?php echo $social_link; ?>" target="_blank">
+                                                            <img src="<?php echo $social_icon['url']; ?>"
+                                                                alt="<?php echo $social_icon['alt']; ?>">
+                                                        </a>
+                                                    </li>
+                                                <?php endwhile; ?>
+                                            </ul>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                
                                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3738.827716624816!2d-112.041907!3d43.490312!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x535459459952dfe9%3A0x79ec5ab9326479ad!2sCutler%20Law%20Office%2C%20P.A.!5e1!3m2!1sen!2sus!4v1761074765304!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                             </div>
-
-                            <?php if ( has_nav_menu( 'footer-links' ) ) : ?>
-                                <h3>Quick Links</h3>
-                                <?php
-                                    wp_nav_menu( array(
-                                        'container'      => false,
-                                        'theme_location' => 'footer-links',
-                                        'fallback_cb'    => false,
-                                    ) );
-                                ?>
-                            <?php endif; ?>
-
-                        <?php endif; ?>
-
-                        <?php if (have_rows('social_icons', 'option')) : ?>
-                            <ul class="socials">
-                                <?php while (have_rows('social_icons', 'option')) : the_row(); ?>
-                                    <?php
-                                    $social_icon = get_sub_field('social_icon');
-                                    $social_link = get_sub_field('social_link');
-                                    ?>
-                                    <li>
-                                        <a class="social-icon" href="<?php echo $social_link; ?>" target="_blank">
-                                            <img src="<?php echo $social_icon['url']; ?>"
-                                                 alt="<?php echo $social_icon['alt']; ?>">
-                                        </a>
-                                    </li>
-                                <?php endwhile; ?>
-                            </ul>
                         <?php endif; ?>
 
                         <?php if (get_field('copyright', 'option')): ?>
@@ -271,52 +285,14 @@ function sp_custom_footer()
             </div>
         <?php else: ?>
 
-            <?php if ($footer_logo = get_field('logo_text', 'option')): ?>
-                <div class="footer__single-page-logo">
-                    <div class="grid-container">
-                        <div class="grid-x grid-margin-x">
-                            <div class="cell text-left">
-                                <a href="<?php echo get_home_url() ?>" class="footer__logo">
-                                    <h2><?php echo $footer_logo ?></h2></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <?php endif; ?>
-            <div class="grid-container footer__single-page-content">
-                <div class="grid-x grid-padding-x align-middle">
+        <!-- -->
+            <div class="grid-container inner-page-footer">
+                <div class="grid-x grid-margin-x">
+            
+                    <div class="cell large-5  medium-6  medium-order-2 footer__form-container">
+                        <div class="footer-links">
 
-                    <?php if (get_field('address_link', 'option') || get_field('address_text', 'option')):
-                        $text = get_field('address_text', 'option') ? get_field('address_text', 'option') : 'Address'; ?>
-                        <div class="cell large-4 medium-12  text-left footer__single-page-address">
-                            <a href="<?php echo get_field('address_link', 'option') ?>" target="_blank" class="footer__address"><?php echo $text ?></a>
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3738.827716624816!2d-112.041907!3d43.490312!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x535459459952dfe9%3A0x79ec5ab9326479ad!2sCutler%20Law%20Office%2C%20P.A.!5e1!3m2!1sen!2sus!4v1761074765304!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                        </div>
-                    <?php endif; ?>
-
-                    <?php if (have_rows('social_icons', 'option')) : ?>
-                        <div class="cell large-4 medium-12  text-center footer__single-page-socials">
-                            <ul class="socials">
-                                <?php while (have_rows('social_icons', 'option')) : the_row(); ?>
-                                    <?php
-                                    $social_icon = get_sub_field('social_icon');
-                                    $social_link = get_sub_field('social_link');
-                                    ?>
-                                    <li>
-                                        <a class="social-icon" href="<?php echo $social_link; ?>" target="_blank">
-                                            <img src="<?php echo $social_icon['url']; ?>"
-                                                 alt="<?php echo $social_icon['alt']; ?>">
-                                        </a>
-                                    </li>
-                                <?php endwhile; ?>
-                            </ul>
-                        </div>
-                    <?php endif; ?>
-
-                    <?php if (get_field('copyright', 'option')): ?>
-                        <div class="cell large-4 medium-12  text-left footer__single-page-copyright">
                             <?php if ( has_nav_menu( 'footer-links' ) ) : ?>
-                                <h3>Quick Links</h3>
                                 <?php
                                     wp_nav_menu( array(
                                         'container'      => false,
@@ -325,15 +301,58 @@ function sp_custom_footer()
                                     ) );
                                 ?>
                             <?php endif; ?>
-                            <div class="copyright copyright--single-page">
+                        </div>
+                    </div>
+
+                    <div class="cell large-5 medium-6 large-offset-1 medium-order-1 text-left footer__content-container">
+                        <?php if ($footer_logo = get_field('logo_text', 'option')): ?>
+                            <div class="footer__logo">
+                                <h2><?php echo $footer_logo ?></h2></div>
+                        <?php endif; ?>
+                        <?php if (get_field('address_link', 'option') || get_field('address_text', 'option')):
+                            $text = get_field('address_text', 'option') ? get_field('address_text', 'option') : 'Address'; ?>
+
+                            <div class="address-row">
+
+                                <div class="columns">
+                                    <div class="column1">
+                                        <a href="<?php echo get_field('address_link', 'option') ?>" target="_blank" class="footer__address"><?php echo $text ?></a>
+                                    </div>
+                                    <div class="column2">
+
+                                        <a class="phone-link" href="tel:208-525-4858">208-525-4858</a>
+
+                                        <?php if (have_rows('social_icons', 'option')) : ?>
+                                            <ul class="socials">
+                                                <?php while (have_rows('social_icons', 'option')) : the_row(); ?>
+                                                    <?php
+                                                    $social_icon = get_sub_field('social_icon');
+                                                    $social_link = get_sub_field('social_link');
+                                                    ?>
+                                                    <li>
+                                                        <a class="social-icon" href="<?php echo $social_link; ?>" target="_blank">
+                                                            <img src="<?php echo $social_icon['url']; ?>"
+                                                                alt="<?php echo $social_icon['alt']; ?>">
+                                                        </a>
+                                                    </li>
+                                                <?php endwhile; ?>
+                                            </ul>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3738.827716624816!2d-112.041907!3d43.490312!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x535459459952dfe9%3A0x79ec5ab9326479ad!2sCutler%20Law%20Office%2C%20P.A.!5e1!3m2!1sen!2sus!4v1761074765304!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if (get_field('copyright', 'option')): ?>
+                            <div class="copyright">
                                 <?php the_field('copyright', 'option') ?>
                             </div>
-                        </div>
-                    <?php endif; ?>
-
+                        <?php endif; ?>
+                    </div>
                 </div>
             </div>
-
         <?php endif; ?>
 
 

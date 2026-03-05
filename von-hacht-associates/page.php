@@ -22,9 +22,10 @@ function genesischild_top_wrap_widgets()
 {
     $hero_url = get_the_post_thumbnail_url(get_the_ID(), 'full_hd');
     $background_mobile = get_field('background_mobile', get_the_ID());
+    $enable_banner_cta = get_field('enable_banner_cta');
+    $on_page_nav = get_field('in-page_nav');
     ?>
-    <section class="banner banner-single-post <?php echo (empty($hero_url)) ? 'empty' : null ?>">
-
+    <section class="<?php echo $on_page_nav ? 'has-on-page-nav ' : ''; echo $enable_banner_cta ? 'banner-with-cta ' : ''; ?>banner banner-single-post <?php echo (empty($hero_url)) ? 'empty' : null ?>">
         <div class="banner__rotate bg-cover white" data-mobile="<?php echo $background_mobile ?>"
              style="background-image: url(<?php echo $hero_url ?>);">
 
@@ -39,7 +40,33 @@ function genesischild_top_wrap_widgets()
 
             <div class="banner__content">
 
+                <?php if( $enable_banner_cta ) : ?>
+                    <?php
+                        if ( function_exists('yoast_breadcrumb') ) {
+                        yoast_breadcrumb( '<p id="breadcrumbs">','</p>' );
+                        }
+                    ?>
+                    
+                    <h1 class="banner__title"><?php the_title() ?></h1>
+
+                    <?php if( get_field('banner_intro_copy') ) : ?>
+                        <p class="intro-copy"><?php the_field('banner_intro_copy'); ?></p>
+                    <?php endif; ?>
+
+                    <?php $cta_group = get_field('cta_block');
+                    $copy = $cta_group['copy'];
+                    $button = $cta_group['button'];
+                    if( $copy && $button ) : ?>
+                        <div class="cta-wrapper">
+                            <p><?php echo $copy; ?></p>
+                            <a class="button" href="<?php echo $button['url']; ?>" class="col2"><?php echo $button['title']; ?></a>
+                        </div>
+                    <?php endif; ?>
+
+                <?php else : ?>
                 <h1 class="banner__title"><?php the_title() ?></h1>
+
+                <?php endif; ?>
 
                 <?php if ($item2 = get_field('position')): ?>
                     <h3><?php echo $item2 ?></h3>
@@ -59,6 +86,20 @@ function genesischild_top_wrap_widgets()
     </section>
 
 
+    <?php if( have_rows('in-page_nav') ) : ?>
+    <div class="in-page-nav">
+        <div class="col1">
+            <h3>On this page</h3>
+        </div>
+        <div class="col2">
+            <?php while( have_rows('in-page_nav') ) : the_row(); ?>
+                <a href="#<?php the_sub_field('anchor_link') ?>"><?php the_sub_field('title'); ?></a>
+            <?php endwhile; ?>
+        </div>
+    </div>
+    <?php endif; ?>
+
+
 
 <?php }
 
@@ -70,9 +111,6 @@ function custom_entry_content()
             <div class="grid-container">
                 <div class="grid-x grid-margin-x list-decor">
 
-                    <div class="cell">
-                        <?php get_template_part('parts/core/breadcrumbs', null); ?>
-                    </div>
                     <?php if (have_posts()) : ?>
                         <?php while (have_posts()) : the_post(); ?>
                             <div class="cell">

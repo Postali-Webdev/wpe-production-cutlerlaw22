@@ -25,7 +25,6 @@ function genesischild_top_wrap_widgets()
     <section class="banner banner-single-post">
         <div class="banner__rotate bg-cover white" style="background-image: url(<?php echo $hero_url ?>);">
             <div class="banner__content">
-
                 <h1 class="banner__title"><?php the_title() ?></h1>
 
                 <?php if ($item2 = get_field('position')): ?>
